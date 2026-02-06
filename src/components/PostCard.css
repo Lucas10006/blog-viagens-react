@@ -1,0 +1,18 @@
+/* Estilos do card de post */
+.post-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  max-width: 300px;
+}
+
+.post-card img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+/* Remove estilo padrão do link */
+.post-link {
+  text-decoration: none;
+  color: inherit;
+}
