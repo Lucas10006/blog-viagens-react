@@ -15,3 +15,10 @@ export async function getDestinos() {
   const data = await response.json()
   return data.destinos
 }
+
+// Buscar um post específico pelo ID
+export async function getPostById(id) {
+  const response = await fetch(`${BASE_URL}/posts/${id}`)
+  const data = await response.json()
+  return data.post
+}

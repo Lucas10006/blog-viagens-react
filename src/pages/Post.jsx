@@ -1,15 +1,27 @@
 // Página de um post individual
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { getPostById } from '../services/api'
 
 function Post() {
-  // Obtém o ID do post a partir da URL
   const { id } = useParams()
+  const [post, setPost] = useState(null)
+
+  // Vai buscar o post à API com base no ID da URL
+  useEffect(() => {
+    getPostById(id).then(data => setPost(data))
+  }, [id])
+
+  // Enquanto carrega
+  if (!post) {
+    return <p>A carregar post...</p>
+  }
 
   return (
     <div>
-      <h1>Post de Viagem</h1>
-      <p>Post número: {id}</p>
-      <p>Conteúdo completo do post será apresentado aqui.</p>
+      <h1>{post.titulo}</h1>
+      <img src={post.imagem} alt={post.titulo} style={{ maxWidth: '400px' }} />
+      <p>{post.descricao}</p>
     </div>
   )
 }
