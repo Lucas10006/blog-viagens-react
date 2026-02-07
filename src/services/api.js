@@ -22,3 +22,10 @@ export async function getPostById(id) {
   const data = await response.json()
   return data.post
 }
+
+// Buscar todos os posts
+export async function getAllPosts() {
+  const response = await fetch(`${BASE_URL}/posts`)
+  const data = await response.json()
+  return data.posts
+}
