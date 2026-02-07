@@ -1,22 +1,18 @@
 // Página inicial do blog
+import { useEffect, useState } from 'react'
+import { getPosts } from '../services/api'
 import PostCard from '../components/PostCard'
 
 function Home() {
-  // Dados temporários (mais tarde vêm da API)
-  const posts = [
-    {
-      id: 1,
-      title: 'Viagem a Paris',
-      description: 'Uma experiência inesquecível na cidade da luz.',
-      image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34'
-    },
-    {
-      id: 2,
-      title: 'Explorar Roma',
-      description: 'História, comida e cultura por todo o lado.',
-      image: 'https://images.unsplash.com/photo-1526481280691-3e91760cbb34'
-    }
-  ]
+  const [posts, setPosts] = useState([])
+
+  // Vai buscar os posts à API quando a página carrega
+  useEffect(() => {
+    getPosts().then(data => {
+      console.log('POSTS DA API 👉', data)
+      setPosts(data)
+    })
+  }, [])
 
   return (
     <div>
@@ -27,9 +23,9 @@ function Home() {
           <PostCard
             key={post.id}
             id={post.id}
-            title={post.title}
-            description={post.description}
-            image={post.image}
+            title={post.titulo}
+            description={post.descricao}
+            image={post.imagem}
           />
         ))}
       </div>
