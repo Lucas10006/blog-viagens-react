@@ -15,22 +15,23 @@ function Home() {
   }, [])
 
   return (
-    <div>
-      <h1>Blog de Viagens</h1>
+  <div className="container mt-4">
+    <h1 className="mb-4">Blog de Viagens</h1>
 
-      <div style={{ display: 'flex', gap: '1rem' }}>
-        {posts.map(post => (
+    <div className="row">
+      {posts.map(post => (
+        <div key={post.id} className="col-md-4 mb-4">
           <PostCard
-            key={post.id}
             id={post.id}
             title={post.titulo}
             description={post.descricao}
             image={post.imagem}
           />
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
-  )
+  </div>
+)
 }
 
 export default Home

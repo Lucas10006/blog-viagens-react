@@ -1,5 +1,7 @@
 import Navbar from './components/Navbar'
 import DestinoPosts from './pages/DestinoPosts'
+import AdminLogin from './pages/AdminLogin'
+import Admin from './pages/Admin'
 
 // Importação do router
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
