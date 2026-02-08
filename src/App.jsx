@@ -2,6 +2,7 @@ import Navbar from './components/Navbar'
 import DestinoPosts from './pages/DestinoPosts'
 import AdminLogin from './pages/AdminLogin'
 import Admin from './pages/Admin'
+import Register from './pages/Register'
 
 // Importação do router
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -25,6 +26,7 @@ function App() {
         <Route path="/destinos/:id" element={<DestinoPosts />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   )
