@@ -20,28 +20,41 @@ function AdminLogin() {
   }
 
   return (
-    <div>
-      <h1>Backoffice Login</h1>
+  <div className="container mt-5">
+    <h1 className="mb-4">Login</h1>
 
-      <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} className="col-md-4">
+      <div className="mb-3">
         <input
           type="text"
+          className="form-control"
           placeholder="Username"
           value={username}
           onChange={e => setUsername(e.target.value)}
         />
+      </div>
 
+      <div className="mb-3">
         <input
           type="password"
+          className="form-control"
           placeholder="Password"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
+      </div>
 
-        <button type="submit">Entrar</button>
-      </form>
-    </div>
-  )
+      <button type="submit" className="btn btn-primary w-100">
+        Entrar
+      </button>
+    </form>
+
+    <p className="text-muted mt-3">
+      * Área reservada ao administrador
+    </p>
+  </div>
+)
+
 }
 
 export default AdminLogin   

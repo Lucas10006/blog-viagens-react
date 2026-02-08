@@ -12,9 +12,10 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <Link className="navbar-brand" to="/">
-          Blog de Viagens
+        <Link className="navbar-brand" to="/" title="Início">
+          <i className="bi bi-house-fill fs-4"></i>
         </Link>
+
 
         <ul className="navbar-nav ms-auto">
           <li className="nav-item">

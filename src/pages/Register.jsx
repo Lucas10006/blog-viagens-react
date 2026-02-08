@@ -34,7 +34,6 @@ function Register() {
       </form>
 
       <p className="text-muted mt-3">
-        * Funcionalidade demonstrativa
       </p>
     </div>
   )

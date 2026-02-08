@@ -3,6 +3,7 @@ import DestinoPosts from './pages/DestinoPosts'
 import AdminLogin from './pages/AdminLogin'
 import Admin from './pages/Admin'
 import Register from './pages/Register'
+import Hero from './components/Hero'
 
 // Importação do router
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -16,7 +17,10 @@ import Post from './pages/Post'
 function App() {
   return (
     <BrowserRouter>
-      {/* Barra de navegação visível em todas as páginas */}
+      {/* Hero no topo */}
+      <Hero />
+
+      {/* Barra de navegação */}
       <Navbar />
 
       <Routes>
@@ -31,5 +35,6 @@ function App() {
     </BrowserRouter>
   )
 }
+
 
 export default App
