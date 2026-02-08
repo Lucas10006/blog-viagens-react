@@ -1,37 +1,32 @@
-// Página inicial do blog
-import { useEffect, useState } from 'react'
-import { getPosts } from '../services/api'
-import PostCard from '../components/PostCard'
-
 function Home() {
-  const [posts, setPosts] = useState([])
-
-  // Vai buscar os posts à API quando a página carrega
-  useEffect(() => {
-    getPosts().then(data => {
-      console.log('POSTS DA API 👉', data)
-      setPosts(data)
-    })
-  }, [])
-
   return (
-  <div className="container mt-4">
-    <h1 className="mb-4">Blog de Viagens</h1>
+    <div className="container mt-5">
+      <div className="row align-items-center">
+        <div className="col-md-6">
+          <h1 className="display-5 fw-bold mb-3">
+            Descobre o teu próximo destino
+          </h1>
 
-    <div className="row">
-      {posts.map(post => (
-        <div key={post.id} className="col-md-4 mb-4">
-          <PostCard
-            id={post.id}
-            title={post.titulo}
-            description={post.descricao}
-            image={post.imagem}
+          <p className="lead">
+            Explora países, cidades e experiências incríveis pelo mundo.
+            Encontra inspiração para a tua próxima viagem.
+          </p>
+
+          <a href="/destinos" className="btn btn-primary btn-lg mt-3">
+            Explorar destinos
+          </a>
+        </div>
+
+        <div className="col-md-6 text-center">
+          <img
+            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
+            alt="Travel"
+            className="img-fluid rounded"
           />
         </div>
-      ))}
+      </div>
     </div>
-  </div>
-)
+  )
 }
 
 export default Home
