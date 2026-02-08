@@ -3,6 +3,7 @@ import AdminLogin from './pages/AdminLogin'
 import Admin from './pages/Admin'
 import Register from './pages/Register'
 import Hero from './components/Hero'
+import Login from './pages/Login'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   )

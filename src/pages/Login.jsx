@@ -1,32 +1,39 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { createUser } from '../services/api'
+import { getUsers } from '../services/api'
 
-function Register() {
+function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
-  function handleRegister(e) {
+  function handleLogin(e) {
     e.preventDefault()
 
-    createUser({ username, password }).then(() => {
-      alert('Registo efetuado com sucesso')
-      navigate('/login')
+    getUsers().then(users => {
+      const found = users.find(
+        u => u.username === username && u.password === password
+      )
+
+      if (found) {
+        localStorage.setItem('isUser', 'true')
+        navigate('/')
+      } else {
+        alert('Credenciais inválidas')
+      }
     })
   }
 
   return (
     <div className="container mt-5">
-      <h1 className="mb-4">Criar Conta</h1>
+      <h1 className="mb-4">Login</h1>
 
-      <form onSubmit={handleRegister} className="col-md-4">
+      <form onSubmit={handleLogin} className="col-md-4">
         <input
           className="form-control mb-3"
           placeholder="Username"
           value={username}
           onChange={e => setUsername(e.target.value)}
-          required
         />
 
         <input
@@ -35,15 +42,14 @@ function Register() {
           placeholder="Password"
           value={password}
           onChange={e => setPassword(e.target.value)}
-          required
         />
 
         <button className="btn btn-primary w-100">
-          Registar
+          Entrar
         </button>
       </form>
     </div>
   )
 }
 
-export default Register
+export default Login

@@ -28,3 +28,21 @@ export async function deleteDestino(id) {
     method: 'DELETE'
   })
 }
+
+// GET users
+export async function getUsers() {
+  const res = await fetch(`${BASE_URL}/users`)
+  const data = await res.json()
+  return data.users
+}
+
+// CREATE user
+export async function createUser(user) {
+  await fetch(`${BASE_URL}/users`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ user })
+  })
+}

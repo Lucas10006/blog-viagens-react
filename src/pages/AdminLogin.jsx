@@ -10,7 +10,6 @@ function AdminLogin() {
   function handleLogin(e) {
     e.preventDefault()
 
-    // Credenciais simples (aceitável para o trabalho)
     if (username === 'admin' && password === 'admin') {
       localStorage.setItem('isAdmin', 'true')
       navigate('/admin')
@@ -50,7 +49,6 @@ function AdminLogin() {
     </form>
 
     <p className="text-muted mt-3">
-      * Área reservada ao administrador
     </p>
   </div>
 )
