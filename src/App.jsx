@@ -23,6 +23,8 @@ function App() {
         <Route path="/destinos" element={<Destinos />} />
         <Route path="/post/:id" element={<Post />} />
         <Route path="/destinos/:id" element={<DestinoPosts />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   )

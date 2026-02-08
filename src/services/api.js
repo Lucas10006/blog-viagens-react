@@ -29,3 +29,21 @@ export async function getAllPosts() {
   const data = await response.json()
   return data.posts
 }
+
+// Apagar um post pelo ID
+export async function deletePost(id) {
+  await fetch(`${BASE_URL}/posts/${id}`, {
+    method: 'DELETE'
+  })
+}
+
+// Criar um novo post
+export async function createPost(post) {
+  await fetch(`${BASE_URL}/posts`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ post })
+  })
+}
