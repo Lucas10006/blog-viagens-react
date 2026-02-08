@@ -2,48 +2,29 @@
 
 const BASE_URL = 'https://api.sheety.co/4c017062924501d35e9c26e8b8f65a8d/blobViagens'
 
-// Buscar todos os posts
-export async function getPosts() {
-  const response = await fetch(`${BASE_URL}/posts`)
-  const data = await response.json()
-  return data.posts
-}
-
-// Buscar todos os destinos
+// GET todos os destinos
 export async function getDestinos() {
-  const response = await fetch(`${BASE_URL}/destinos`)
-  const data = await response.json()
+  const res = await fetch(`${BASE_URL}/destinos`)
+  const data = await res.json()
   return data.destinos
 }
 
-// Buscar um post específico pelo ID
-export async function getPostById(id) {
-  const response = await fetch(`${BASE_URL}/posts/${id}`)
-  const data = await response.json()
-  return data.post
-}
-
-// Buscar todos os posts
-export async function getAllPosts() {
-  const response = await fetch(`${BASE_URL}/posts`)
-  const data = await response.json()
-  return data.posts
-}
-
-// Apagar um post pelo ID
-export async function deletePost(id) {
-  await fetch(`${BASE_URL}/posts/${id}`, {
-    method: 'DELETE'
-  })
-}
-
-// Criar um novo post
-export async function createPost(post) {
-  await fetch(`${BASE_URL}/posts`, {
+// CRIAR destino
+export async function createDestino(destino) {
+  const res = await fetch(`${BASE_URL}/destinos`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ post })
+    body: JSON.stringify({ destino })
+  })
+  const data = await res.json()
+  return data
+}
+
+// APAGAR destino
+export async function deleteDestino(id) {
+  await fetch(`${BASE_URL}/destinos/${id}`, {
+    method: 'DELETE'
   })
 }

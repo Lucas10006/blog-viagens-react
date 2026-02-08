@@ -1,134 +1,104 @@
-// Página principal do backoffice
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getPosts, deletePost, createPost } from '../services/api'
+import { getDestinos, createDestino, deleteDestino } from '../services/api'
 
 function Admin() {
   const navigate = useNavigate()
-  const [posts, setPosts] = useState([])
+  const [destinos, setDestinos] = useState([])
 
-  const [titulo, setTitulo] = useState('')
-  const [descricao, setDescricao] = useState('')
+  const [nome, setNome] = useState('')
+  const [pais, setPais] = useState('')
   const [imagem, setImagem] = useState('')
-  const [destinoId, setDestinoId] = useState('')
 
   useEffect(() => {
     const isAdmin = localStorage.getItem('isAdmin')
     if (!isAdmin) {
       navigate('/admin/login')
     } else {
-      loadPosts()
+      loadDestinos()
     }
   }, [navigate])
 
-  function loadPosts() {
-    getPosts().then(data => setPosts(data))
+  function loadDestinos() {
+    getDestinos().then(data => setDestinos(data))
+  }
+
+  function handleCreate(e) {
+    e.preventDefault()
+
+    createDestino({
+      nome,
+      pais,
+      imagem
+    }).then(() => {
+      setNome('')
+      setPais('')
+      setImagem('')
+      loadDestinos()
+    })
   }
 
   function handleDelete(id) {
-    if (confirm('Tens a certeza que queres apagar este post?')) {
-      deletePost(id).then(() => loadPosts())
+    if (confirm('Tens a certeza que queres apagar este destino?')) {
+      deleteDestino(id).then(() => loadDestinos())
     }
-  }
-
-  function handleCreatePost(e) {
-    e.preventDefault()
-
-    const newPost = {
-      titulo,
-      descricao,
-      imagem,
-      destinoId: Number(destinoId)
-    }
-
-    createPost(newPost).then(() => {
-      setTitulo('')
-      setDescricao('')
-      setImagem('')
-      setDestinoId('')
-      loadPosts()
-    })
   }
 
   return (
     <div className="container mt-4">
-      <h1>Backoffice</h1>
+      <h1>Backoffice – Destinos</h1>
 
-      {/* FORMULÁRIO CRIAR POST */}
-      <form onSubmit={handleCreatePost} className="mb-4">
-        <h3>Criar novo post</h3>
+      {/* FORMULÁRIO */}
+      <form onSubmit={handleCreate} className="mb-4">
+        <input
+          className="form-control mb-2"
+          placeholder="Nome do destino"
+          value={nome}
+          onChange={e => setNome(e.target.value)}
+          required
+        />
 
-        <div className="row">
-          <div className="col-md-3 mb-2">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Título"
-              value={titulo}
-              onChange={e => setTitulo(e.target.value)}
-              required
-            />
-          </div>
+        <input
+          className="form-control mb-2"
+          placeholder="País"
+          value={pais}
+          onChange={e => setPais(e.target.value)}
+          required
+        />
 
-          <div className="col-md-3 mb-2">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Descrição"
-              value={descricao}
-              onChange={e => setDescricao(e.target.value)}
-              required
-            />
-          </div>
+        <input
+          className="form-control mb-2"
+          placeholder="URL da imagem"
+          value={imagem}
+          onChange={e => setImagem(e.target.value)}
+          required
+        />
 
-          <div className="col-md-3 mb-2">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="URL da imagem"
-              value={imagem}
-              onChange={e => setImagem(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="col-md-2 mb-2">
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Destino ID"
-              value={destinoId}
-              onChange={e => setDestinoId(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="col-md-1 mb-2">
-            <button className="btn btn-success w-100">
-              Criar
-            </button>
-          </div>
-        </div>
+        <button className="btn btn-primary">
+          Criar destino
+        </button>
       </form>
 
-      {/* TABELA DE POSTS */}
-      <table className="table table-striped mt-4">
+      {/* LISTA */}
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Título</th>
+            <th>Nome</th>
+            <th>País</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          {posts.map(post => (
-            <tr key={post.id}>
-              <td>{post.id}</td>
-              <td>{post.titulo}</td>
+          {destinos.map(destino => (
+            <tr key={destino.id}>
+              <td>{destino.id}</td>
+              <td>{destino.nome}</td>
+              <td>{destino.pais}</td>
               <td>
                 <button
                   className="btn btn-danger btn-sm"
-                  onClick={() => handleDelete(post.id)}
+                  onClick={() => handleDelete(destino.id)}
                 >
                   Apagar
                 </button>
