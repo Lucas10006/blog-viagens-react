@@ -46,3 +46,21 @@ export async function createUser(user) {
     body: JSON.stringify({ user })
   })
 }
+
+// GET likes
+export async function getLikes() {
+  const res = await fetch(`${BASE_URL}/likes`)
+  const data = await res.json()
+  return data.likes
+}
+
+// CREATE like
+export async function createLike(like) {
+  await fetch(`${BASE_URL}/likes`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ like })
+  })
+}

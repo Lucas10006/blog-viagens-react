@@ -7,16 +7,34 @@ function Login() {
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
+  const ADMIN_USERNAME = 'admin'
+  const ADMIN_PASSWORD = 'admin'
+
   function handleLogin(e) {
     e.preventDefault()
 
+    // LOGIN do admin
+    if (
+      username === ADMIN_USERNAME &&
+      password === ADMIN_PASSWORD
+    ) {
+      localStorage.removeItem('isUser')
+      localStorage.removeItem('user')
+      localStorage.setItem('isAdmin', 'true')
+      navigate('/admin')
+      return
+    }
+
+    // LOGIN do user normal
     getUsers().then(users => {
       const found = users.find(
         u => u.username === username && u.password === password
       )
 
       if (found) {
+        localStorage.removeItem('isAdmin')
         localStorage.setItem('isUser', 'true')
+        localStorage.setItem('user', JSON.stringify(found))
         navigate('/')
       } else {
         alert('Credenciais inválidas')
@@ -34,6 +52,7 @@ function Login() {
           placeholder="Username"
           value={username}
           onChange={e => setUsername(e.target.value)}
+          required
         />
 
         <input
@@ -42,6 +61,7 @@ function Login() {
           placeholder="Password"
           value={password}
           onChange={e => setPassword(e.target.value)}
+          required
         />
 
         <button className="btn btn-primary w-100">
