@@ -21,7 +21,6 @@ function App() {
       {/* Barra de navegação */}
       <Navbar />
 
-      // 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/destinos" element={<Destinos />} />
